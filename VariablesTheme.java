@@ -28,7 +28,7 @@ public class VariablesTheme {
         int costWithDiscount = pen * book - discount;
         System.out.println(discount);
         System.out.println(costWithDiscount);
-        System.out.println("");
+        System.out.println();
 
         System.out.println("3. Вывод слова JAVA");
         System.out.println("   J    a  v     v  a");

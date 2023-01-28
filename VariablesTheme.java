@@ -18,19 +18,18 @@ public class VariablesTheme {
         System.out.println("Частота процессора: " + freqCpu);
         System.out.println("Версия Windows: " + windowsVersion);
         System.out.println("Компьютер включен? " + isCompOn);
-        System.out.println();
-
-        System.out.println("2. Расчет стоимости товара со скидкой");
-        int pen = 100;
-        int book = 200;
-        int percentage = 11;
-        int discount = pen * book * 11 / 100;
-        int costWithDiscount = pen * book - discount;
-        System.out.println(discount);
-        System.out.println(costWithDiscount);
-        System.out.println();
-
-        System.out.println("3. Вывод слова JAVA");
+        
+        System.out.println("\n2. Расчет стоимости товара со скидкой");
+        int penCost = 100;
+        int bookCost = 200;
+        int discount = 11;
+        int discountSum = (penCost + bookCost) * (100 - discount) / 100;
+        int discountPrice = (penCost + bookCost) - discountSum;
+        System.out.println("Общая стоимость товаров без скидки: " + (penCost + bookCost));
+        System.out.println("Сумма скидки: " + discountPrice);
+        System.out.println("Общая стоимость товаров со скидкой: " + discountSum );
+       
+        System.out.println("\n3. Вывод слова JAVA");
         System.out.println("   J    a  v     v  a");
         System.out.println("   J   a a  v   v  a a");
         System.out.println("J  J  aaaaa  V V  aaaaa");
@@ -46,9 +45,8 @@ public class VariablesTheme {
         System.out.println(shortMax + ", " + ++shortMax + ", " + --shortMax);
         System.out.println(intMax + ", " + ++intMax + ", " + --intMax);
         System.out.println(longMax + ", " + ++longMax + ", " + --longMax);
-        System.out.println();
 
-        System.out.println("5. Перестановка значений переменных");
+        System.out.println("\n5. Перестановка значений переменных");
         int num1 = 2;
         int num2 = 5;
         int temp = num1;
@@ -69,75 +67,49 @@ public class VariablesTheme {
         num2 = num1 / num2;
         num1 /= num2;
         System.out.println("новые значения переменных: num1 = " + num1 + ", num2 = " + num2);
-        System.out.println();
 
-        System.out.println("6. Вывод символов и их кодов");
-        byte code1 = 35;
-        byte code2 = 38;
-        byte code3 = 64;
-        byte code4 = 94;
-        byte code5 = 95;
-        char char1 = (char) code1;
-        char char2 = (char) code2;
-        char char3 = (char) code3;
-        char char4 = (char) code4;
-        char char5 = (char) code5;
-        System.out.println("Коду " + code1 + " соотвествует символ " + char1);
-        System.out.println("Коду " + code2 + " соотвествует символ " + char2);
-        System.out.println("Коду " + code3 + " соотвествует символ " + char3);
-        System.out.println("Коду " + code4 + " соотвествует символ " + char4);
-        System.out.println("Коду " + code5 + " соотвествует символ " + char5);
-        System.out.println();
+        System.out.println("\n6. Вывод символов и их кодов");
+        char hash = (char) 35;
+        char ampersand = (char) 38;
+        char at = (char) 64;
+        char caret = (char) 94;
+        char underscore = (char) 95;
+        System.out.println("Коду " + (int) hash + " соответствует символ " + hash);
+        System.out.println("Коду " + (int) ampersand + " соответствует символ " + ampersand);
+        System.out.println("Коду " + (int) at + " соответствует символ " + at);
+        System.out.println("Коду " + (int) caret + " соответствует символ " + caret);
+        System.out.println("Коду " + (int) underscore + " соответствует символ " + underscore);
 
-        System.out.println("7. Вывод в консоль ASCII-арт Дюка");
+        System.out.println("\n7. Вывод в консоль ASCII-арт Дюка");
         char slash = '/';
         char backSlash = '\\';
-        char line = '_';
         char bracketRight = '(';
         char bracketLeft = ')';
         System.out.println("    " + slash + backSlash);
         System.out.println("   " + slash + "  " + backSlash);
-        System.out.println("  " + slash + line + bracketRight + " " + bracketLeft + 
+        System.out.println("  " + slash + underscore + bracketRight + " " + bracketLeft + 
                 backSlash);
         System.out.println(" " + slash + "      " + backSlash);
-        System.out.println("" + slash + line + line + line + line + slash + 
-                backSlash + line + line + backSlash);
-        System.out.println();
+        System.out.println("" + slash + underscore + underscore + underscore + underscore + 
+                slash + backSlash + underscore + underscore + backSlash);
 
-        System.out.println("8. Вывод количества сотен, десятков и единиц числа");
+        System.out.println("\n8. Вывод количества сотен, десятков и единиц числа");
         int num = 123;
+        int hundredNum = num / 100;
+        int tenNum = num % 100 / 10;
+        int oneNum = num % 100 % 10;
         System.out.println("Число " + num + " содержит:");
-        System.out.println(num / 100 + " сотен");
-        System.out.println(num % 100 / 10 + " десятков");
-        System.out.println(num % 100 % 10 + " единиц");
-        System.out.println("Сумма его цифр = " + (num / 100 + num % 100 / 10 + num % 100 % 10));
-        System.out.println("Произведение = " + num / 100 * num % 100 / 10 * num % 100 % 10);
-        System.out.println();
+        System.out.println(hundredNum + " сотен");
+        System.out.println(tenNum + " десятков");
+        System.out.println(oneNum + " единиц");
+        System.out.println("Сумма его цифр = " + (hundredNum + tenNum + oneNum));
+        System.out.println("Произведение = " + hundredNum * tenNum * oneNum);
 
-        System.out.println("9. Вывод времени");
+        System.out.println("\n9. Вывод времени");
         num = 86399;
         int hour = num / 3600;
-        int minute = num / 60 % (hour * 60);
-        int second = num % (hour * 3600) % (minute * 60);
-        System.out.println(hour + ":" + minute + ":" + second);
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-        
+        int minute = num % 3600 / 60;
+        int second = minute % 60;
+        System.out.println(hour + ":" + minute + ":" + second);      
     }
 }

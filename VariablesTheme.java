@@ -20,12 +20,12 @@ public class VariablesTheme {
         System.out.println("Компьютер включен? " + isCompOn);
         
         System.out.println("\n2. Расчет стоимости товара со скидкой");
-        int penCost = 100;
-        int bookCost = 200;
+        int penPrice = 100;
+        int bookPrice = 200;
         int discount = 11;
-        int discountSum = (penCost + bookCost) * (100 - discount) / 100;
-        int discountPrice = (penCost + bookCost) - discountSum;
-        System.out.println("Общая стоимость товаров без скидки: " + (penCost + bookCost));
+        int discountSum = (penPrice + bookPrice) * (100 - discount) / 100;
+        int discountPrice = (penPrice + bookPrice) - discountSum;
+        System.out.println("Общая стоимость товаров без скидки: " + (penPrice + bookPrice));
         System.out.println("Сумма скидки: " + discountPrice);
         System.out.println("Общая стоимость товаров со скидкой: " + discountSum );
        
@@ -34,9 +34,8 @@ public class VariablesTheme {
         System.out.println("   J   a a  v   v  a a");
         System.out.println("J  J  aaaaa  V V  aaaaa");
         System.out.println(" JJ  a     a  V  a     a");
-        System.out.println();
-
-        System.out.println("4. Вывод min и max значений целых числовых типов");
+        
+        System.out.println("\n4. Вывод min и max значений целых числовых типов");
         byte byteMax = Byte.MAX_VALUE;
         short shortMax = Short.MAX_VALUE;
         int intMax = Integer.MAX_VALUE;
@@ -69,11 +68,11 @@ public class VariablesTheme {
         System.out.println("новые значения переменных: num1 = " + num1 + ", num2 = " + num2);
 
         System.out.println("\n6. Вывод символов и их кодов");
-        char hash = (char) 35;
-        char ampersand = (char) 38;
-        char at = (char) 64;
-        char caret = (char) 94;
-        char underscore = (char) 95;
+        char hash = '#';
+        char ampersand = '&';
+        char at = '@';
+        char caret = '^';
+        char underscore = '_';
         System.out.println("Коду " + (int) hash + " соответствует символ " + hash);
         System.out.println("Коду " + (int) ampersand + " соответствует символ " + ampersand);
         System.out.println("Коду " + (int) at + " соответствует символ " + at);
@@ -95,21 +94,22 @@ public class VariablesTheme {
 
         System.out.println("\n8. Вывод количества сотен, десятков и единиц числа");
         int num = 123;
-        int hundredNum = num / 100;
-        int tenNum = num % 100 / 10;
-        int oneNum = num % 100 % 10;
+        int hundreds = num / 100;
+        int tens = num % 100 / 10;
+        int ones = num % 10;
         System.out.println("Число " + num + " содержит:");
-        System.out.println(hundredNum + " сотен");
-        System.out.println(tenNum + " десятков");
-        System.out.println(oneNum + " единиц");
-        System.out.println("Сумма его цифр = " + (hundredNum + tenNum + oneNum));
-        System.out.println("Произведение = " + hundredNum * tenNum * oneNum);
+        System.out.println(hundreds + " сотен");
+        System.out.println(tens + " десятков");
+        System.out.println(ones + " единиц");
+        System.out.println("Сумма его цифр = " + (hundreds + tens + ones));
+        System.out.println("Произведение = " + hundreds * tens * ones);
 
         System.out.println("\n9. Вывод времени");
+        int totalSeconds = 86399;
         num = 86399;
-        int hour = num / 3600;
-        int minute = num % 3600 / 60;
-        int second = minute % 60;
-        System.out.println(hour + ":" + minute + ":" + second);      
+        int hours = num / 3600;
+        int minutes = num % 3600 / 60;
+        int seconds = minutes % 60;
+        System.out.println(hours + ":" + minutes + ":" + seconds);
     }
 }

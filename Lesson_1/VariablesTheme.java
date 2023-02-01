@@ -1,6 +1,6 @@
 public class VariablesTheme {	
     
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
         System.out.println("1. Вывод значений переменных на консоль");
         byte core = 4;
         short ram = 16;

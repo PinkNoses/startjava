@@ -53,7 +53,7 @@ public class IfElseStatementTheme {
             } else {
                 System.out.print("отрицательное ");
             }
-            if (num % 2 ==0) {
+            if (num % 2 == 0) {
                 System.out.println(" и четное");
             } else {
                 System.out.println("и нечетное");
@@ -85,13 +85,13 @@ public class IfElseStatementTheme {
         }
         
         System.out.println("\n5.Определение символа по его коду");
-        char symb = '\u0057';
-        System.out.print("Символ " + symb + " - ");
-        if ('W' >= '0' && 'W' <= '9') {
+        char symbol =  '\u0057';
+        System.out.print("Символ " + symbol + " - ");
+        if (symbol >= '0' && symbol <= '9') {
             System.out.println("число");
-        } else if ('W' >= 'A' && 'W' <= 'Z') {
+        } else if (symbol >= 'A' && symbol <= 'Z') {
             System.out.println("большая буква");
-        } else if ('W' >= 'a' && 'W' <= 'z') {
+        } else if (symbol >= 'a' && symbol <= 'z') {
             System.out.println("маленькая буква");
         } else {
             System.out.println("не буква и не число");
@@ -99,47 +99,40 @@ public class IfElseStatementTheme {
         
         System.out.println("\n6.Подсчет суммы вклада и начисленных банком %");
         int deposit = 300000;
-        int yearlyProfit = 0;
-        int percent = 0;
-        if (deposit < 100000) {
-            percent = 5;
-        } else if (deposit >= 100000 & deposit <= 300000) {
+        int percent = 5;
+        if (deposit >= 100000 & deposit <= 300000) {
            percent = 7;
         } else if (deposit > 300000) {
             percent = 10;
         }
-        System.out.println("Cуммa вклада: " + deposit);
-        yearlyProfit = deposit * (100 + percent) / 100;
+        System.out.println("Сумма вклада: " + deposit);
+        int yearlyProfit = deposit * (100 + percent) / 100;
         System.out.println ("Начисленный %: " + (yearlyProfit - deposit));
         System.out.println("Итоговая сумма с %: " + yearlyProfit);
         
         System.out.println("\n7.Определение оценки по предметам");
-        int history = 59;
-        int prog = 91;
-        int ratingHistory = 0;
-        int ratingProg = 0;
-        if (history <= 60) {
-            ratingHistory = 2;
-        } else if (history > 91) {
+        int historyPercent = 59;
+        int programmingPercent = 91;
+        int ratingHistory = 2;
+        int ratingProgramming = 2;
+        if (historyPercent > 91) {
             ratingHistory = 5;
-        } else if (history > 73) {
+        } else if (historyPercent > 73) {
             ratingHistory = 4;
-        } else if (history > 60) {
+        } else if (historyPercent > 60) {
             ratingHistory = 3;
         }
         System.out.println(ratingHistory + ": История");
-        if (prog <= 60) {
-            ratingProg = 2;
-        } else if (prog > 91) {
-            ratingProg = 5;
-        } else if (prog > 73) {
-            ratingProg = 4;
-        } else if (prog > 60) {
-            ratingProg = 4;
+        if (programmingPercent > 91) {
+            ratingProgramming = 5;
+        } else if (programmingPercent > 73) {
+            ratingProgramming = 4;
+        } else if (programmingPercent > 60) {
+            ratingProgramming = 3;
         }
-        System.out.println(ratingProg + ": Программирование");
-        System.out.println("Средний балл оценок по предметам: " + (ratingProg + ratingHistory) / 2);
-        System.out.println("Средний % по предметам: " + (history + prog) / 2);
+        System.out.println(ratingProgramming + ": Программирование");
+        System.out.println("Средний балл оценок по предметам: " + (ratingProgramming + ratingHistory) / 2);
+        System.out.println("Средний % по предметам: " + (historyPercent + programmingPercent) / 2);
         
         System.out.println("\n8.Расчет прибыли за год");
         int rent = 5000;

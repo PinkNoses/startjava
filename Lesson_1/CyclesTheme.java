@@ -88,35 +88,35 @@ public class CyclesTheme {
             System.out.println();
         }
 
-        int hash1 = 0;
-        int hash2 = 0;
-        while (hash1 < 5) {
-            while (hash2 + hash1 < 5) {
+        int lineNum = 0;
+        int columnNum = 0;
+        while (lineNum < 5) {
+            while (columnNum + lineNum < 5) {
                 System.out.print("#");
-                hash2++;
+                columnNum++;
             }
             System.out.println();
-            hash2 = 0;
-            hash1++;
+            columnNum = 0;
+            lineNum++;
         }
 
-        int dollar1 = 0;
-        int dollar2 = 0;
+        lineNum = 0;
+        columnNum = 0;
         do {
             do {
                 System.out.print("$");
-                dollar2++;
-            } while (dollar2 <= dollar1);
+                columnNum++;
+            } while (columnNum <= lineNum);
             System.out.println();
-            dollar1++;
-            dollar2 = 0;
-            if (dollar1 >= 3) {
-                dollar2 = 2;
+            lineNum++;
+            columnNum = 0;
+            if (lineNum >= 3) {
+                columnNum = 2;
             }
-            if (dollar1 == 4) {
-                dollar2 = 4;
+            if (lineNum == 4) {
+                columnNum = 4;
             }
-        } while (dollar1 < 5);
+        } while (lineNum < 5);
 
         System.out.println("\n7.Отображение ASCII-символов");
         System.out.printf("%5s %5s %n", "Dec", "Char");
@@ -145,21 +145,29 @@ public class CyclesTheme {
         }
 
         System.out.println("\n9.Определение, является ли число счастливым");
-        num = 165091;
+        num = 145091;
         copyNum = num;
+        int sum = 0;
         int sumRightHalfDigits = 0;
         count = 0;
         System.out.print("Сумма цифр ");
-        while (count < 3) {
+        while (copyNum > 0) {
+            if (count == 3) {
+                sumRightHalfDigits = sum;
+                System.out.println(" = " + sumRightHalfDigits);
+                System.out.print("Сумма цифр ");
+                count = 0;
+                sum = 0;
+            }
             int digit = copyNum % 10;
-            sumRightHalfDigits += digit;
+            sum += digit;
             copyNum /= 10;
             count++;
             System.out.print(digit);
+
         }
-        System.out.println(" = " + sumRightHalfDigits);
-        int sumLeftHalfDigits = copyNum % 10 + (copyNum / 10) % 10 + (copyNum / 100) % 10;
-        System.out.println("Сумма цифр " + copyNum + " = " + sumLeftHalfDigits);
+        int sumLeftHalfDigits = sum;
+        System.out.println(" = " + sumLeftHalfDigits);
         System.out.print("Число " + num + " является ");
         if (sumRightHalfDigits == sumLeftHalfDigits) {
             System.out.println("счастливым");
@@ -185,7 +193,7 @@ public class CyclesTheme {
             for (int j = 2; j < 10; j++) {
                 System.out.printf("%3d", (i * j));
             }
-            System.out.println("");
+            System.out.println();
         }
    }
 }

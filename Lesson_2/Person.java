@@ -2,8 +2,8 @@ public class Person {
 
     String sex = "male";
     String name = "Bob";
-    double height = 1.80d;
-    double weight = 73.5d;
+    double height = 1.80;
+    double weight = 73.5;
     int age = 32;
 
     void go() {
@@ -25,5 +25,4 @@ public class Person {
     void learnJava() {
         System.out.println("Bob is learning Java");
     }
-
 }

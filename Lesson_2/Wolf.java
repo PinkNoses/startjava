@@ -3,7 +3,7 @@ public class Wolf {
     private String gender;
     private String wolfName;
     private String colour;
-    private double  weight;
+    private double weight;
     private int age;
 
     public String getGender() {

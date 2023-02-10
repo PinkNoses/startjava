@@ -29,38 +29,25 @@ public class Calculator {
         this.sign = sign;
     }
 
-    public int getResult() {
-        return result;
-    }
-
-    public void setResult(int result) {
-        this.result = result;
-    }
-
-    public int resolve (int a, char sign, int b) {
+    public int calculate() {
         switch (sign) {
             case '+' :
-                result = a + b;
-                break;
+                return a + b;
             case '-' :
-                result = a - b;
-                break;
+                return a - b;
             case '*' :
-                result = a * b;
-                break;
+                return a * b;
             case '/' :
-                result = a / b;
-                break;
+                return a / b;
             case '%' :
-                result = a % b;
-                break;
+                return a % b;
             case '^' :
                 result = 1;
                 for (int i = 1; i <= b; i++) {
                     result *= a; 
                 }
-                break;
-            }
+                return result;
+        }
         return result;
     }
 }

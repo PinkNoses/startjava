@@ -3,11 +3,10 @@ import java.util.Scanner;
 public class CalculatorTest {
 
     public static void main (String[] args) {
-        boolean isAnswerIsYes = true;
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
-        while (isAnswerIsYes) {
-            String answer = "";
+        String answer = "yes";
+        while (answer.equals("yes")) {
             System.out.print("Введите первое число: ");
             calculator.setA(sc.nextInt());
             System.out.print("Введите знак математической операции: ");
@@ -15,15 +14,12 @@ public class CalculatorTest {
             System.out.print("Введите второе число: ");
             calculator.setB(sc.nextInt());
             sc.nextLine();
-            calculator.setResult(calculator.resolve(calculator.getA(), calculator.getSign(), calculator.getB()));
-            System.out.println(calculator.getA() + " " + calculator.getSign() + " " +
-                    calculator.getB() + " = " + calculator.getResult());
+            System.out.println(calculator.getA() + " " + calculator.getSign() + " " + calculator.getB() + 
+                    " = " + calculator.calculate());
+            answer = " ";
             while (!(answer.equals("yes") || answer.equals("no"))) {
                 System.out.println("Хотите продолжить вычисления? [yes/no]");
                 answer = sc.nextLine();
-                if (answer.equals("no")) {
-                    isAnswerIsYes = false;
-                }
             }
         }
     }

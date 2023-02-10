@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class CalculatorTest {
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
         String answer = "yes";
@@ -16,11 +16,10 @@ public class CalculatorTest {
             sc.nextLine();
             System.out.println(calculator.getA() + " " + calculator.getSign() + " " + calculator.getB() + 
                     " = " + calculator.calculate());
-            answer = " ";
-            while (!(answer.equals("yes") || answer.equals("no"))) {
+            do {
                 System.out.println("Хотите продолжить вычисления? [yes/no]");
                 answer = sc.nextLine();
-            }
+            } while (!answer.equals("yes") && !answer.equals("no"));
         }
     }
 }

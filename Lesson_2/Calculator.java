@@ -3,7 +3,6 @@ public class Calculator {
     private int a;
     private int b;
     private char sign;
-    private int result;
 
     public int getA() {
         return a;
@@ -30,6 +29,7 @@ public class Calculator {
     }
 
     public int calculate() {
+        int result = 1;
         switch (sign) {
             case '+' :
                 return a + b;
@@ -42,12 +42,11 @@ public class Calculator {
             case '%' :
                 return a % b;
             case '^' :
-                result = 1;
                 for (int i = 1; i <= b; i++) {
                     result *= a; 
                 }
                 return result;
         }
-        return result;
+        return 0;
     }
 }

@@ -29,7 +29,6 @@ public class Calculator {
     }
 
     public int calculate() {
-        int result = 1;
         switch (sign) {
             case '+' :
                 return a + b;
@@ -42,8 +41,9 @@ public class Calculator {
             case '%' :
                 return a % b;
             case '^' :
+                int result = 1;
                 for (int i = 1; i <= b; i++) {
-                    result *= a; 
+                    result*= a; 
                 }
                 return result;
         }

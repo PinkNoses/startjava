@@ -4,9 +4,7 @@ public class Jaeger {
     private double height;
     private int speed;
 
-    public Jaeger() {
-        
-    }
+    public Jaeger() {}
 
     public Jaeger(String modelName, double height, int speed) {
         this.modelName = modelName;

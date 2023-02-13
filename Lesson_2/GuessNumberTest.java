@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.Random;
+
 
 public class GuessNumberTest {
 
@@ -9,12 +9,12 @@ public class GuessNumberTest {
         Player player1 = new Player(sc.nextLine());
         System.out.println("Игрок № 2, введи свое имя:");
         Player player2 = new Player(sc.nextLine());
-        GuessNumber guessNumber = new GuessNumber(player1, player2);
+        GuessNumber game = new GuessNumber(player1, player2);
         String answer = "yes";
         while (answer.equals("yes")) {
-            guessNumber.setSecretNum(1 + (int) (Math.random() * 100));
-            guessNumber.startGame();
+            game.start();
             do {
+                game.setEqualNums(false);
                 System.out.println("Хотите продолжить игру? [yes/no]");
                 answer = sc.nextLine();
             } while (!answer.equals("yes") && !answer.equals("no"));

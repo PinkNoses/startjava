@@ -3,48 +3,52 @@ import java.util.Random;
 
 public class GuessNumber {
 
-    private int secretNum;
+    private int secretNumber;
     private Player player1;
     private Player player2;
-    private boolean equalNums;
+    private boolean equalNumbers;
 
     public GuessNumber(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
     }
 
-    public void setEqualNums(boolean equalNums) {
-        this.equalNums = equalNums;
-    }
+    Scanner sc = new Scanner(System.in);
 
     public void start() {
-        Scanner sc = new Scanner(System.in);
-        secretNum = 1 + (int) (Math.random() * 100);
+        secretNumber = 1 + (int) (Math.random() * 100);
         do {
-            System.out.println(secretNum);
-            System.out.println(player1.getName() + ", введите предполагаемое число:");
-            player1.setNumber(sc.nextInt());
-            compareNums(player1);
-            if (!equalNums) {
-                System.out.println(player2.getName() + ", введите предполагаемое число:");
-                player2.setNumber(sc.nextInt());
-                compareNums(player2);
+            inputNumber(player1);
+            if (!compareNumbers(player1)) {
+                inputNumber(player2);
+                compareNumbers(player2);
             }
-        } while (!equalNums);
+        } while (!stopGame());
     }
 
-    private boolean compareNums(Player player) {
-        if (player.getNumber() == secretNum) {
+    private void inputNumber(Player player) {
+        System.out.println(player.getName() + ", введите предполагаемое число:");
+        player.setNumber(sc.nextInt());
+        sc.nextLine();
+    }
+
+    private boolean compareNumbers(Player player) {
+        if (player.getNumber() == secretNumber) {
             System.out.println(player.getName() + ", Вы победили!");
-            equalNums = true; 
-        } else if (player.getNumber() > secretNum) {
+            return true;
+        }
+        if (player.getNumber() > secretNumber) {
             System.out.println("число " + player.getNumber() + " больше того, что загадал компьютер");
-        } else if (player.getNumber() < secretNum) {
+        } else {
             System.out.println("число " + player.getNumber() + " меньше того, что загадал компьютер");
         }
-        return equalNums; 
+        return false;
+    }
+    
+    private boolean stopGame() {
+        if (player1.getNumber() == secretNumber || player2.getNumber() == secretNumber) {
+            return true;
+        }
+        return false;
     }
 }
-
-
-

@@ -6,7 +6,6 @@ public class GuessNumber {
     private int secretNumber;
     private Player player1;
     private Player player2;
-    private boolean equalNumbers;
 
     public GuessNumber(Player player1, Player player2) {
         this.player1 = player1;

@@ -17,11 +17,11 @@ public class GuessNumber {
         secretNumber = 1 + (int) (Math.random() * 100);
         do {
             Scanner sc = new Scanner(System.in);
-            inputNumber(player1, new Scanner(System.in));
+            inputNumber(player1, sc);
             if (compareNumbers(player1)) {
                 return;
             }
-            inputNumber(player2, new Scanner(System.in));
+            inputNumber(player2, sc);
         } while (!compareNumbers(player2));
     }
 

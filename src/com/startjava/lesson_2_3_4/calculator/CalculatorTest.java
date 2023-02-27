@@ -3,8 +3,9 @@ package com.startjava.lesson_2_3.calculator;
 import java.util.Scanner;
 
 public class CalculatorTest {
+    String[] names = args;
 
-    public static void main(String[] args) {
+    public static void main(args) {
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
         String answer = "yes";

@@ -1,11 +1,10 @@
-package com.startjava.lesson_2_3.calculator;
+package com.startjava.lesson_2_3_4.calculator;
 
 import java.util.Scanner;
 
 public class CalculatorTest {
-    String[] names = args;
 
-    public static void main(args) {
+    public static void main(String[] args) {
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
         String answer = "yes";

@@ -2,7 +2,7 @@ package com.startjava.lesson_1.base;
 
 public class IfElseStatementTheme {
 
-    //public static void main (String[] args) {
+    public static void main (String[] args) {
         System.out.println("1.Перевод псевдокода на язык Java");
         int age = 25;
         double height = 1.5d;

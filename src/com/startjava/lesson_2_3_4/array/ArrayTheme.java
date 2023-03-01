@@ -7,10 +7,9 @@ public class ArrayTheme {
         int length = intArr.length;
         System.out.print("Исходный массив: ");
         outputArray(intArr);
-        for (int i = 0; i < intArr.length / 2; i++) {
-            length--;
+        for (int i = 0; i < length; i++) {
             int temp = intArr[i];
-            intArr[i] = intArr[length];
+            intArr[i] = intArr[--length];
             intArr[length] = temp;
         }
         System.out.print("\nИсходный массив в обратном порядке: ");

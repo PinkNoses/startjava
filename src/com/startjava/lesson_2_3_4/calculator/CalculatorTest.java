@@ -7,21 +7,27 @@ public class CalculatorTest {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
-        String answer = "yes";
-        while (answer.equals("yes")) {
-            System.out.print("Введите первое число: ");
-            calculator.setA(sc.nextInt());
-            System.out.print("Введите знак математической операции: ");
-            calculator.setSign(sc.next().charAt(0));
-            System.out.print("Введите второе число: ");
-            calculator.setB(sc.nextInt());
-            sc.nextLine();
-            System.out.println(calculator.getA() + " " + calculator.getSign() + " " + calculator.getB() + 
-                    " = " + calculator.calculate());
-            do {
-                System.out.println("Хотите продолжить вычисления? [yes/no]");
-                answer = sc.nextLine();
-            } while (!answer.equals("yes") && !answer.equals("no"));
+        String answer = "";
+        while (!answer.equals("no")) {
+            startCalculate(calculator, sc);
+            answer = checkAnswer(sc);
+            if (answer.equals("no")) {
+                return;
+            } else if (!answer.equals("yes")) {
+                answer = checkAnswer(sc);
+            }
         }
+    }
+
+    private static void startCalculate(Calculator calculator, Scanner sc) {
+        System.out.print("Введите математическое выражение: ");
+        calculator.setMathExpression(sc.nextLine().split(" "));
+        System.out.print(calculator.outputResult() == 1 ? " = " + (int) calculator.calculate() : " = " +
+                calculator.calculate());
+    }
+
+    private static String checkAnswer(Scanner sc) {
+        System.out.println("\nХотите продолжить вычисления? [yes/no]");
+        return sc.nextLine();
     }
 }

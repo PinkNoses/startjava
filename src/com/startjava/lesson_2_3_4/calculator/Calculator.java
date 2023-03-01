@@ -1,54 +1,43 @@
 package com.startjava.lesson_2_3_4.calculator;
 
 public class Calculator {
-    
-    private int a;
-    private int b;
-    private char sign;
 
-    public int getA() {
-        return a;
+    private String[] mathExpression = new String[3];
+
+    public void setMathExpression(String[] mathExpression) {
+        this.mathExpression = mathExpression;
     }
 
-    public void setA(int a) {
-        this.a = a;
-    }
-
-    public int getB() {
-        return b;
-    }
-
-    public void setB(int b) {
-        this.b = b;
-    }
-
-    public char getSign() {
-        return sign;
-    }
-
-    public void setSign(char sign) {
-        this.sign = sign;
-    }
-
-    public int calculate() {
+    public double calculate() {
+        int firstNum = Integer.parseInt(mathExpression[0]);
+        String sign = mathExpression[1];
+        int secondNum = Integer.parseInt(mathExpression[2]);
         switch (sign) {
-            case '+' :
-                return a + b;
-            case '-' :
-                return a - b;
-            case '*' :
-                return a * b;
-            case '/' :
-                return a / b;
-            case '%' :
-                return a % b;
-            case '^' :
-                int result = 1;
-                for (int i = 1; i <= b; i++) {
-                    result*= a; 
-                }
-                return result;
+            case "+":
+                return Math.addExact(firstNum, secondNum);
+            case "-":
+                return Math.subtractExact(firstNum, secondNum);
+            case "*":
+                return Math.multiplyExact(firstNum, secondNum);
+            case "/":
+                return (double) firstNum / secondNum;
+            case "%":
+                return (double) firstNum % secondNum;
+            case "^":
+                return Math.pow(firstNum, secondNum);
         }
         return 0;
+    }
+
+    public int outputResult() {
+        int intPartOfResult = (int) calculate();
+        double residual = Math.ceil(((calculate() - (double) intPartOfResult) * 100) / 100);
+        String[] residualArr = (residual + "").split("\\.");
+        for (String s : residualArr) {
+            if (Integer.parseInt(s) != 0) {
+                return -1;
+            }
+        }
+        return 1;
     }
 }

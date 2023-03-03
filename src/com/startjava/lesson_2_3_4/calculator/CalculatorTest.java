@@ -7,27 +7,42 @@ public class CalculatorTest {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
-        String answer = "";
-        while (!answer.equals("no")) {
+        String answer;
+        while (true) {
             startCalculate(calculator, sc);
-            answer = checkAnswer(sc);
+            answer = inputAnswer(sc);
+            if (!answer.equals("yes") && !answer.equals("no")) {
+                do {
+                    answer = inputAnswer(sc);
+                } while (!(answer.equals("yes") || answer.equals("no")));
+            }
             if (answer.equals("no")) {
                 return;
-            } else if (!answer.equals("yes")) {
-                answer = checkAnswer(sc);
             }
         }
     }
 
     private static void startCalculate(Calculator calculator, Scanner sc) {
         System.out.print("Введите математическое выражение: ");
-        calculator.setMathExpression(sc.nextLine().split(" "));
-        System.out.print(calculator.outputResult() == 1 ? " = " + (int) calculator.calculate() : " = " +
-                calculator.calculate());
+        String[] mathExpression = sc.nextLine().split(" ");
+        double result = calculator.calculate(mathExpression);
+        System.out.print(outputResult(result) == 1 ? " = " + (int) result : " = " + result);
     }
 
-    private static String checkAnswer(Scanner sc) {
-        System.out.println("\nХотите продолжить вычисления? [yes/no]");
+    private static int outputResult(double result) {
+        int intPartOfResult = (int) result;
+        double residual = Math.ceil(((result - (double) intPartOfResult) * 100) / 100);
+        String[] residualArr = (residual + "").split("\\.");
+        for (String s : residualArr) {
+            if (Integer.parseInt(s) != 0) {
+                return -1;
+            }
+        }
+        return 1;
+    }
+
+    private static String inputAnswer(Scanner sc) {
+        System.out.println("\nХотите продолжить вычисления?");
         return sc.nextLine();
     }
 }

@@ -7,20 +7,16 @@ public class CalculatorTest {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
-        String answer;
-        while (true) {
-            startCalculate(calculator, sc);
-            answer = inputAnswer(sc);
-            if (!answer.equals("yes") && !answer.equals("no")) {
-                do {
-                    answer = inputAnswer(sc);
-                } while (!(answer.equals("yes") || answer.equals("no")));
+        String answer = "yes";
+        do {
+            if (answer.equals("yes")) {
+                startCalculate(calculator, sc);
             }
-            if (answer.equals("no")) {
-                return;
-            }
-        }
+            System.out.println("\nХотите продолжить вычисления? [yes/no]");
+            answer = sc.nextLine();
+        } while (!answer.equals("no"));
     }
+
 
     private static void startCalculate(Calculator calculator, Scanner sc) {
         System.out.print("Введите математическое выражение: ");
@@ -39,10 +35,5 @@ public class CalculatorTest {
             }
         }
         return 1;
-    }
-
-    private static String inputAnswer(Scanner sc) {
-        System.out.println("\nХотите продолжить вычисления?");
-        return sc.nextLine();
     }
 }

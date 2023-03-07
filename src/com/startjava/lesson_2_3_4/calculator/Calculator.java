@@ -1,23 +1,24 @@
 package com.startjava.lesson_2_3_4.calculator;
 
 public class Calculator {
-    public double calculate(String[] mathExpression) {
-        int firstNum = Integer.parseInt(mathExpression[0]);
-        String sign = mathExpression[1];
-        int secondNum = Integer.parseInt(mathExpression[2]);
+    public double calculate(String mathExpression) {
+        String[] mathExpressionArray = mathExpression.split(" ");
+        int num1 = Integer.parseInt(mathExpressionArray[0]);
+        String sign = mathExpressionArray[1];
+        int num2 = Integer.parseInt(mathExpressionArray[2]);
         switch (sign) {
             case "+":
-                return Math.addExact(firstNum, secondNum);
+                return Math.addExact(num1, num2);
             case "-":
-                return Math.subtractExact(firstNum, secondNum);
+                return Math.subtractExact(num1, num2);
             case "*":
-                return Math.multiplyExact(firstNum, secondNum);
+                return Math.multiplyExact(num1, num2);
             case "/":
-                return (double) firstNum / secondNum;
+                return (double) num1 / num2;
             case "%":
-                return (double) firstNum % secondNum;
+                return (double) num1 % num2;
             case "^":
-                return Math.pow(firstNum, secondNum);
+                return Math.pow(num1, num2);
         }
         return 0;
     }

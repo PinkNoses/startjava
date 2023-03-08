@@ -1,11 +1,11 @@
 package com.startjava.lesson_2_3_4.calculator;
 
 public class Calculator {
-    public double calculate(String mathExpression) {
-        String[] mathExpressionArray = mathExpression.split(" ");
-        int num1 = Integer.parseInt(mathExpressionArray[0]);
-        String sign = mathExpressionArray[1];
-        int num2 = Integer.parseInt(mathExpressionArray[2]);
+    public double calculate(String mathExpressionLine) {
+        String[] mathExpression = mathExpressionLine.split(" ");
+        int num1 = Integer.parseInt(mathExpression[0]);
+        String sign = mathExpression[1];
+        int num2 = Integer.parseInt(mathExpression[2]);
         switch (sign) {
             case "+":
                 return Math.addExact(num1, num2);

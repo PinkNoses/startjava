@@ -21,6 +21,6 @@ public class CalculatorTest {
         System.out.print("Введите математическое выражение: ");
         String mathExpression = sc.nextLine();
         double result = calculator.calculate(mathExpression);
-        System.out.println("Ответ: " + (result % 1 != 0 ? "" + result : Math.round(result)));
+        System.out.println("Ответ: " + (result % 1 != 0 ? "" + result : (int) result));
     }
 }

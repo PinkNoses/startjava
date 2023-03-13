@@ -1,6 +1,5 @@
 package com.startjava.lesson_2_3_4.guess;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class GuessNumberTest {
@@ -16,25 +15,12 @@ public class GuessNumberTest {
         String answer = "yes";
         do {
             if (answer.equals("yes")) {
-                Arrays.fill(player1.getNumArray(), 0, player1.getCount(), 0);
-                Arrays.fill(player2.getNumArray(), 0, player2.getCount(), 0);
-                player1.setCount(0);
-                player2.setCount(0);
                 game.start();
-                inputPlayerNumber(player1);
-                inputPlayerNumber(player2);
+                game.inputPlayerNumbers(player1);
+                game.inputPlayerNumbers(player2);
             }
             System.out.println("Хотите продолжить игру? [yes/no]");
             answer = sc.nextLine();
         } while (!answer.equals("no"));
-    }
-
-    private static void inputPlayerNumber(Player player) {
-        System.out.print("Игрок " + player.getName() + " назвал следующие цифры: ");
-        int[] playerNumber = Arrays.copyOf(player.getNumArray(), player.getCount());
-        for (int num : playerNumber) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
     }
 }

@@ -18,7 +18,6 @@ public class GuessNumber {
         player1.cleanPlayerNumbers();
         player2.cleanPlayerNumbers();
         secretNumber = 1 + (int) (Math.random() * 100);
-        System.out.println("Secret Number: " + secretNumber);
         Scanner sc = new Scanner(System.in);
         do {
             inputNumber(player1, player1.getCount(), sc);

@@ -34,6 +34,14 @@ public class GuessNumber {
         outputPlayerNumbers(player2);
     }
 
+    private boolean stopGame(Player player) {
+        if (player.getCount() == player.getLength()) {
+            System.out.println("У игрока " + player.getName() + " закончились попытки.");
+            return true;
+        }
+        return false;
+    }
+
     private void inputNumber(Player player, Scanner sc) {
         if (!stopGame(player)) {
             System.out.print(player.getName() + ", введите предполагаемое число: ");
@@ -51,14 +59,6 @@ public class GuessNumber {
             System.out.println("число " + currentNumber + " больше того, что загадал компьютер");
         } else {
             System.out.println("число " + currentNumber + " меньше того, что загадал компьютер");
-        }
-        return false;
-    }
-
-    private boolean stopGame(Player player) {
-        if (player.getCount() == player.getLength()) {
-            System.out.println("У игрока " + player.getName() + " закончились попытки.");
-            return true;
         }
         return false;
     }

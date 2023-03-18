@@ -5,11 +5,13 @@ public class Book {
     private final String author;
     private final String title;
     private final int publishYear;
+    private int length;
 
     public Book(String author, String title, int publishYear) {
         this.author = author;
         this.title = title;
         this.publishYear = publishYear;
+        calculateLength();
     }
 
     public String getTitle() {
@@ -17,11 +19,15 @@ public class Book {
     }
 
     public int getLength() {
-        return toString().length();
+        return length;
     }
 
     @Override
     public String toString() {
         return author + ", " + title + ", " + publishYear;
+    }
+
+    private void calculateLength() {
+        length = toString().length();
     }
 }

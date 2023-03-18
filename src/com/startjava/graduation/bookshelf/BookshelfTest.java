@@ -4,25 +4,30 @@ import java.util.Scanner;
 
 public class BookshelfTest {
     static Bookshelf bookshelf = new Bookshelf();
+    static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         while (true) {
             showMenu();
-            bookshelf.showBookshelf();
-            System.out.print("\nДля работы введите пункт из меню: ");
+            showBookshelf();
+            System.out.print("\nДля работы введите номер пункта из меню: ");
             String input = sc.nextLine();
-            switch (input) {
-                case "Добавить книгу" -> addBook();
-                case "Взять книгу" -> deleteBook();
-                case "Очистить шкаф" -> clearShelves();
-                case "Завершить" -> {
-                    System.out.println("До скорой встречи!");
-                    return;
+            if (checkInput(input)) {
+                switch (Integer.parseInt(input)) {
+                    case 1 -> addBook();
+                    case 2 -> deleteBook();
+                    case 3 -> clearShelves();
+                    case 4 -> {
+                        System.out.println("До скорой встречи!");
+                        return;
+                    }
+                    default -> System.out.println("Неккоректно введен номер пункта из меню! Попробуйте еще раз.\n");
                 }
+                System.out.println("Для продолжения работы нажмите Enter");
+                sc.nextLine();
+            } else {
+                System.out.println("Некорректные введенные данные. Ожидаемый тип данных int.\n");
             }
-            System.out.println("Для продолжения работы нажмите Enter");
-            sc.nextLine();
         }
     }
 
@@ -35,22 +40,59 @@ public class BookshelfTest {
                 4. Завершить\s""");
     }
 
+    private static void showBookshelf() {
+        if (bookshelf.getBooksCount() == 0) {
+            System.out.println("\nСейчас шкаф пуст. Вы можете добавить в него первую книгу.");
+        } else {
+            System.out.println("В шкафу " + bookshelf.getBooksCount() + " книги и свободно " + bookshelf.getEmptyShelvesNumber() + " полок");
+            for (Book book : bookshelf.getAll()) {
+                System.out.print("|" + book + " ".repeat(bookshelf.getLength() - book.getLength()) + "|\n" + "|" +
+                        "-".repeat(bookshelf.getLength()) + "|\n");
+            }
+            if (bookshelf.getBooksCount() != bookshelf.getARRAY_LENGTH()) {
+                System.out.println("|" + " ".repeat(bookshelf.getLength()) + "|\n");
+            }
+        }
+    }
+
+    private static boolean checkInput(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
     private static void addBook() {
-        System.out.println("Какую книгу хотите добавить в книжный шкаф? ");
-        if (bookshelf.add()) {
+        if (bookshelf.add(createBook())) {
             System.out.println("Книга успешно добавлена в книжный шкаф.");
         } else {
             System.out.println("Невозможно добавить книгу. В шкафу нет свободной полки.");
         }
     }
 
+    private static Book createBook() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Введите имя автора: ");
+        String author = sc.nextLine();
+        System.out.print("Введите название книги: ");
+        String title = sc.nextLine();
+        System.out.print("Введите год издания: ");
+        int publishYear = sc.nextInt();
+        return new Book(author, title, publishYear);
+    }
+
     private static void deleteBook() {
-        try {
-            if (bookshelf.delete()) {
-                System.out.println("Книга была взята.");
-            }
-        } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+        if (bookshelf.getBooksCount() == 0) {
+            System.out.println("Невозможно взять книгу - шкаф пуст!");
+            return;
+        }
+        System.out.print("Введите название книги: ");
+        if (bookshelf.delete(sc.nextLine())) {
+            System.out.println("Книга была взята.");
+        } else {
+            System.out.println("Книга не была удалена. Убедитесь, что название введено правильно.");
         }
     }
 

@@ -1,93 +1,83 @@
 package com.startjava.graduation.bookshelf;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Bookshelf {
-    private final Book[] books = new Book[10];
-    private final int arrayLength = books.length;
-    private int bookshelfLength;
-    private int booksNumber;
+    private final int ARRAY_LENGTH = 10;
+    private final Book[] books = new Book[ARRAY_LENGTH];
+    private int length;
+    private int booksCount;
 
-    Scanner sc = new Scanner(System.in);
+    public int getARRAY_LENGTH() {
+        return ARRAY_LENGTH;
+    }
 
-    public boolean add() {
-        if (booksNumber != arrayLength) {
-            books[booksNumber] = create();
-            checkBookLength(books[booksNumber]);
-            booksNumber++;
+    public int getLength() {
+        return length;
+    }
+
+    public int getBooksCount() {
+        return booksCount;
+    }
+
+    public boolean add(Book book) {
+        if (booksCount != ARRAY_LENGTH) {
+            books[booksCount] = book;
+            checkBookLength(books[booksCount]);
+            booksCount++;
             return true;
         }
         return false;
     }
 
-    public boolean delete() throws NullPointerException {
-        if (booksNumber == 0) {
+    public boolean delete(String title) {
+        if (booksCount == 0) {
             return false;
         }
-        System.out.print("Введите название книги: ");
-        Book bookForDelete = find(sc.nextLine());
-        if (bookForDelete == null) {
-            throw new NullPointerException("Книга не была удалена. Убедитесь, что название введено правильно.");
+        Book bookForDelete = find(title);
+        if (bookForDelete != null) {
+            int lengthThisBook = bookForDelete.getLength();
+            int index = Arrays.asList(books).indexOf(bookForDelete);
+            books[index] = null;
+            System.arraycopy(books, index + 1, books, index, ARRAY_LENGTH - index - 1);
+            books[ARRAY_LENGTH - 1] = null;
+            booksCount--;
+            if (lengthThisBook == length) {
+                findNewLength();
+            }
+            return true;
         }
-        int lengthThisBook = bookForDelete.getLength();
-        int index = Arrays.asList(books).indexOf(bookForDelete);
-        books[index] = null;
-        System.arraycopy(books, index + 1, books, index, arrayLength - index - 1);
-        books[arrayLength - 1] = null;
-        booksNumber--;
-        if (lengthThisBook == bookshelfLength) {
-            findNewBookshelfLength();
-        }
-        return true;
+        return false;
     }
 
     public boolean clearShelves() {
-        if (booksNumber == 0) {
+        if (booksCount == 0) {
             return false;
         }
         Arrays.fill(books, null);
-        booksNumber = 0;
+        booksCount = 0;
         return true;
     }
 
-    public void showBookshelf() {
-        if (booksNumber == 0) {
-            System.out.println("\nСейчас шкаф пуст. Вы можете добавить в него первую книгу.");
-        } else {
-            System.out.println("В шкафу " + booksNumber + " книги и свободно " + getEmptyShelvesNumber() + " полок");
-            for (Book book : getAll()) {
-                System.out.printf("|" + book + " ".repeat(bookshelfLength - book.getLength()) + "|\n" + "|" +
-                        "-".repeat(bookshelfLength) + "|\n");
-            }
-            if (booksNumber != arrayLength) {
-                System.out.println("|" + " ".repeat(bookshelfLength) + "|\n");
-            }
-        }
+    public int getEmptyShelvesNumber() {
+        return ARRAY_LENGTH - booksCount;
     }
 
-    private Book create() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Введите имя автора: ");
-        String author = sc.nextLine();
-        System.out.print("Введите название книги: ");
-        String title = sc.nextLine();
-        System.out.print("Введите год издания: ");
-        int publishYear = sc.nextInt();
-        return new Book(author, title, publishYear);
+    public Book[] getAll() {
+        return Arrays.copyOf(books, booksCount);
     }
 
     private void checkBookLength(Book book) {
-        if (book.getLength() == bookshelfLength || book.getLength() < bookshelfLength) {
+        if (book.getLength() == length || book.getLength() < length) {
             return;
         }
-        if (book.getLength() > bookshelfLength) {
-            bookshelfLength = book.getLength();
+        if (book.getLength() > length) {
+            length = book.getLength();
         }
     }
 
     private Book find(String title) {
-        for (int i = 0; i < booksNumber; i++) {
+        for (int i = 0; i < booksCount; i++) {
             if (books[i].getTitle().equals(title)) {
                 return books[i];
             }
@@ -95,21 +85,13 @@ public class Bookshelf {
         return null;
     }
 
-    private void findNewBookshelfLength() {
+    private void findNewLength() {
         int maxLengthBook = Integer.MIN_VALUE;
         for (Book book : getAll()) {
             if (book.getLength() > maxLengthBook) {
                 maxLengthBook = book.getLength();
             }
         }
-        bookshelfLength = maxLengthBook;
-    }
-
-    private Book[] getAll() {
-        return Arrays.copyOf(books, booksNumber);
-    }
-
-    private int getEmptyShelvesNumber() {
-        return arrayLength - booksNumber;
+        length = maxLengthBook;
     }
 }

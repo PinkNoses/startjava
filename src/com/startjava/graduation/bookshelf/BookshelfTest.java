@@ -44,7 +44,7 @@ public class BookshelfTest {
         if (bookshelf.getBooksCount() == 0) {
             System.out.println("\nСейчас шкаф пуст. Вы можете добавить в него первую книгу.");
         } else {
-            System.out.println("В шкафу " + bookshelf.getBooksCount() + " книги и свободно " + bookshelf.getEmptyShelvesNumber() + " полок");
+            System.out.println("В шкафу " + bookshelf.getBooksCount() + " книги и свободно " + bookshelf.getEmptyShelvesCount() + " полок");
             for (Book book : bookshelf.getAll()) {
                 System.out.print("|" + book + " ".repeat(bookshelf.getLength() - book.getLength()) + "|\n" + "|" +
                         "-".repeat(bookshelf.getLength()) + "|\n");

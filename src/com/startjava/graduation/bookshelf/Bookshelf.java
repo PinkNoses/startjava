@@ -59,7 +59,7 @@ public class Bookshelf {
         return true;
     }
 
-    public int getEmptyShelvesNumber() {
+    public int getEmptyShelvesCount() {
         return ARRAY_LENGTH - booksCount;
     }
 

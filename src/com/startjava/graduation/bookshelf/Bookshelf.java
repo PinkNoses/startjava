@@ -3,45 +3,43 @@ package com.startjava.graduation.bookshelf;
 import java.util.Arrays;
 
 public class Bookshelf {
-    private final int ARRAY_LENGTH = 10;
-    private final Book[] books = new Book[ARRAY_LENGTH];
+    private static final int CAPACITY = 10;
+    private final Book[] books = new Book[CAPACITY];
     private int length;
-    private int booksCount;
+    private int countBooks;
 
-    public int getARRAY_LENGTH() {
-        return ARRAY_LENGTH;
+    public int getCapacity() {
+        return CAPACITY;
     }
 
     public int getLength() {
         return length;
     }
 
-    public int getBooksCount() {
-        return booksCount;
+    public int getCountBooks() {
+        return countBooks;
     }
 
     public boolean add(Book book) {
-        if (booksCount != ARRAY_LENGTH) {
-            books[booksCount] = book;
-            checkBookLength(books[booksCount]);
-            booksCount++;
+        if (countBooks < CAPACITY) {
+            books[countBooks] = book;
+            checkBookLength(books[countBooks]);
+            countBooks++;
             return true;
         }
         return false;
     }
 
     public boolean delete(String title) {
-        if (booksCount == 0) {
+        if (countBooks == 0) {
             return false;
         }
-        Book bookForDelete = find(title);
-        if (bookForDelete != null) {
-            int lengthThisBook = bookForDelete.getLength();
-            int index = Arrays.asList(books).indexOf(bookForDelete);
+        int index = findIndex(title);
+        if (index != -1) {
+            int lengthThisBook = books[index].getLength();
             books[index] = null;
-            System.arraycopy(books, index + 1, books, index, ARRAY_LENGTH - index - 1);
-            books[ARRAY_LENGTH - 1] = null;
-            booksCount--;
+            System.arraycopy(books, index + 1, books, index, CAPACITY - index - 1);
+            countBooks--;
             if (lengthThisBook == length) {
                 findNewLength();
             }
@@ -51,20 +49,20 @@ public class Bookshelf {
     }
 
     public boolean clearShelves() {
-        if (booksCount == 0) {
+        if (countBooks == 0) {
             return false;
         }
-        Arrays.fill(books, null);
-        booksCount = 0;
+        Arrays.fill(books, 0, countBooks, null);
+        countBooks = 0;
         return true;
     }
 
     public int getEmptyShelvesCount() {
-        return ARRAY_LENGTH - booksCount;
+        return CAPACITY - countBooks;
     }
 
     public Book[] getAll() {
-        return Arrays.copyOf(books, booksCount);
+        return Arrays.copyOf(books, countBooks);
     }
 
     private void checkBookLength(Book book) {
@@ -76,13 +74,13 @@ public class Bookshelf {
         }
     }
 
-    private Book find(String title) {
-        for (int i = 0; i < booksCount; i++) {
+    private int findIndex(String title) {
+        for (int i = 0; i < countBooks; i++) {
             if (books[i].getTitle().equals(title)) {
-                return books[i];
+                return i;
             }
         }
-        return null;
+        return -1;
     }
 
     private void findNewLength() {

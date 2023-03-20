@@ -20,6 +20,10 @@ public class Bookshelf {
         return countBooks;
     }
 
+    public Book getBook(int index) {
+        return books[index];
+    }
+
     public boolean add(Book book) {
         if (countBooks < CAPACITY) {
             books[countBooks] = book;
@@ -28,6 +32,11 @@ public class Bookshelf {
             return true;
         }
         return false;
+    }
+
+    public boolean find(String title) {
+        int index = findIndex(title);
+        return index != -1;
     }
 
     public boolean delete(String title) {
@@ -46,6 +55,15 @@ public class Bookshelf {
             return true;
         }
         return false;
+    }
+
+    public int findIndex(String title) {
+        for (int i = 0; i < countBooks; i++) {
+            if (books[i].getTitle().equals(title)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public boolean clearShelves() {
@@ -72,15 +90,6 @@ public class Bookshelf {
         if (book.getLength() > length) {
             length = book.getLength();
         }
-    }
-
-    private int findIndex(String title) {
-        for (int i = 0; i < countBooks; i++) {
-            if (books[i].getTitle().equals(title)) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     private void findNewLength() {

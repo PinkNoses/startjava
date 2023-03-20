@@ -15,9 +15,10 @@ public class BookshelfTest {
             if (checkInput(input)) {
                 switch (Integer.parseInt(input)) {
                     case 1 -> addBook();
-                    case 2 -> deleteBook();
-                    case 3 -> clearShelves();
-                    case 4 -> {
+                    case 2 -> findBook();
+                    case 3 -> deleteBook();
+                    case 4 -> clearShelves();
+                    case 5 -> {
                         System.out.println("До скорой встречи!");
                         return;
                     }
@@ -35,9 +36,10 @@ public class BookshelfTest {
         System.out.println("""
                         Меню
                 1. Добавить книгу
-                2. Удалить книгу
-                3. Очистить шкаф
-                4. Завершить\s""");
+                2. Найти книгу
+                3. Удалить книгу
+                4. Очистить шкаф
+                5. Завершить\s""");
     }
 
     private static void showBookshelf() {
@@ -82,6 +84,17 @@ public class BookshelfTest {
         System.out.print("Введите год издания: ");
         int publishYear = sc.nextInt();
         return new Book(author, title, publishYear);
+    }
+
+    private static void findBook() {
+        System.out.print("Введите название книги: ");
+        String title = sc.nextLine();
+        if (bookshelf.find(title)) {
+            int index = bookshelf.findIndex(title);
+            System.out.println("Книга найдена: " + bookshelf.getBook(index));
+        } else {
+            System.out.println("Книга не была найдена. Убедитесь, что название введено правильно.");
+        }
     }
 
     private static void deleteBook() {

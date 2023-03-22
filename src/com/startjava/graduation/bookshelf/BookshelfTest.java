@@ -7,29 +7,11 @@ public class BookshelfTest {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        while (true) {
+        do {
             showMenu();
             showBookshelf();
             System.out.print("\nДля работы введите номер пункта из меню: ");
-            String input = sc.nextLine();
-            if (checkInput(input)) {
-                switch (Integer.parseInt(input)) {
-                    case 1 -> addBook();
-                    case 2 -> findBook();
-                    case 3 -> deleteBook();
-                    case 4 -> clearShelves();
-                    case 5 -> {
-                        System.out.println("До скорой встречи!");
-                        return;
-                    }
-                    default -> System.out.println("Некорректно введен номер пункта из меню! Попробуйте еще раз.\n");
-                }
-                System.out.println("Для продолжения работы нажмите Enter");
-                sc.nextLine();
-            } else {
-                System.out.println("Некорректные введенные данные. Требуется вводить номера пунктов из меню.\n");
-            }
-        }
+        } while (checkChosenMenuItem());
     }
 
     private static void showMenu() {
@@ -43,17 +25,18 @@ public class BookshelfTest {
     }
 
     private static void showBookshelf() {
+        int length = bookshelf.getLength();
         if (bookshelf.getCountBooks() == 0) {
             System.out.println("\nСейчас шкаф пуст. Вы можете добавить в него первую книгу.");
         } else {
             System.out.println("В шкафу " + bookshelf.getCountBooks() + " книги и свободно " +
                     bookshelf.getEmptyShelvesCount() + " полок");
             for (Book book : bookshelf.getAll()) {
-                System.out.print("|" + book + " ".repeat(bookshelf.getLength() - book.getLength()) + "|\n" + "|" +
-                        "-".repeat(bookshelf.getLength()) + "|\n");
+                System.out.println("\n|" + book + " ".repeat(length - book.getLength()) + "|\n" + "|" +
+                        "-".repeat(length) + "|");
             }
             if (bookshelf.getCountBooks() != bookshelf.getCapacity()) {
-                System.out.println("|" + " ".repeat(bookshelf.getLength()) + "|\n");
+                System.out.println("|" + " ".repeat(length) + "|\n");
             }
         }
     }
@@ -65,6 +48,28 @@ public class BookshelfTest {
         } catch (NumberFormatException ex) {
             return false;
         }
+    }
+
+    private static boolean checkChosenMenuItem() {
+        String input = sc.nextLine();
+        if (checkInput(input)) {
+            switch (Integer.parseInt(input)) {
+                case 1 -> addBook();
+                case 2 -> findBook();
+                case 3 -> deleteBook();
+                case 4 -> clearShelves();
+                case 5 -> {
+                    System.out.println("До скорой встречи!");
+                    return false;
+                }
+                default -> System.out.println("Некорректно введен номер пункта из меню! Попробуйте еще раз.\n");
+            }
+            System.out.println("Для продолжения работы нажмите Enter");
+            sc.nextLine();
+        } else {
+            System.out.println("Некорректные введенные данные. Требуется вводить номера пунктов из меню.\n");
+        }
+        return true;
     }
 
     private static void addBook() {
@@ -88,9 +93,8 @@ public class BookshelfTest {
 
     private static void findBook() {
         System.out.print("Введите название книги: ");
-        String title = sc.nextLine();
-        if (bookshelf.find(title)) {
-            int index = bookshelf.findIndex(title);
+        int index = bookshelf.find(sc.nextLine());
+        if (index != -1) {
             System.out.println("Книга найдена: " + bookshelf.getBook(index));
         } else {
             System.out.println("Книга не была найдена. Убедитесь, что название введено правильно.");
@@ -114,7 +118,7 @@ public class BookshelfTest {
         if (bookshelf.clearShelves()) {
             System.out.println("Шкаф успешно очищен.");
         } else {
-            System.out.println("Не удалось очистить шкаф.");
+            System.out.println("Не удалось очистить шкаф. В шкафу нет книг.");
         }
     }
 }

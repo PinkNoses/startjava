@@ -11,7 +11,7 @@ public class BookshelfTest {
             showMenu();
             showBookshelf();
             System.out.print("\nДля работы введите номер пункта из меню: ");
-        } while (checkChosenMenuItem());
+        } while (isValidChosenMenuItem());
     }
 
     private static void showMenu() {
@@ -26,34 +26,27 @@ public class BookshelfTest {
 
     private static void showBookshelf() {
         int length = bookshelf.getLength();
-        if (bookshelf.getCountBooks() == 0) {
+        int countBooks = bookshelf.getCountBooks();
+        if (countBooks == 0) {
             System.out.println("\nСейчас шкаф пуст. Вы можете добавить в него первую книгу.");
         } else {
-            System.out.println("В шкафу " + bookshelf.getCountBooks() + " книги и свободно " +
+            System.out.println("В шкафу " + countBooks + " книги и свободно " +
                     bookshelf.getEmptyShelvesCount() + " полок");
             for (Book book : bookshelf.getAll()) {
-                System.out.println("\n|" + book + " ".repeat(length - book.getLength()) + "|\n" + "|" +
-                        "-".repeat(length) + "|");
+                System.out.println("|" + book +
+                        " ".repeat(length - book.getLength()) + "|\n" +
+                        "|" + "-".repeat(length) + "|");
             }
-            if (bookshelf.getCountBooks() != bookshelf.getCapacity()) {
+            if (countBooks != bookshelf.getCapacity()) {
                 System.out.println("|" + " ".repeat(length) + "|\n");
             }
         }
     }
 
-    private static boolean checkInput(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException ex) {
-            return false;
-        }
-    }
-
-    private static boolean checkChosenMenuItem() {
-        String input = sc.nextLine();
-        if (checkInput(input)) {
-            switch (Integer.parseInt(input)) {
+    private static boolean isValidChosenMenuItem() {
+        String menuItem = sc.nextLine();
+        if (isValid(menuItem)) {
+            switch (Integer.parseInt(menuItem)) {
                 case 1 -> addBook();
                 case 2 -> findBook();
                 case 3 -> deleteBook();
@@ -70,6 +63,15 @@ public class BookshelfTest {
             System.out.println("Некорректные введенные данные. Требуется вводить номера пунктов из меню.\n");
         }
         return true;
+    }
+
+    private static boolean isValid(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
     }
 
     private static void addBook() {
@@ -93,11 +95,11 @@ public class BookshelfTest {
 
     private static void findBook() {
         System.out.print("Введите название книги: ");
-        int index = bookshelf.find(sc.nextLine());
-        if (index != -1) {
-            System.out.println("Книга найдена: " + bookshelf.getBook(index));
-        } else {
+        Book findBook = bookshelf.find(sc.nextLine());
+        if (findBook == null) {
             System.out.println("Книга не была найдена. Убедитесь, что название введено правильно.");
+        } else {
+            System.out.println("Книга найдена: " + findBook);
         }
     }
 

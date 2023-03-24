@@ -34,8 +34,9 @@ public class Bookshelf {
         return false;
     }
 
-    public int find(String title) {
-        return findIndex(title);
+    public Book find(String title) {
+        int bookIndex = findIndex(title);
+        return bookIndex != -1 ? getBook(bookIndex) : null;
     }
 
     public boolean delete(String title) {

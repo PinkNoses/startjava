@@ -82,11 +82,10 @@ public class Bookshelf {
     }
 
     private void calcMaxLength() {
-        int maxLengthBook = 0;
+        length = 0;
         for (Book book : getAll()) {
-            if (book.getLength() > maxLengthBook) {
-                maxLengthBook = book.getLength();
-                length = maxLengthBook;
+            if (book.getLength() > length) {
+                length = book.getLength();
             }
         }
     }

@@ -11,7 +11,7 @@ public class BookshelfTest {
             showMenu();
             showBookshelf();
             System.out.print("\nДля работы введите номер пункта из меню: ");
-        } while (isValidChosenMenuItem());
+        } while (isActionSelected());
     }
 
     private static void showMenu() {
@@ -31,10 +31,9 @@ public class BookshelfTest {
             System.out.println("\nСейчас шкаф пуст. Вы можете добавить в него первую книгу.");
         } else {
             System.out.println("В шкафу " + countBooks + " книги и свободно " +
-                    bookshelf.getEmptyShelvesCount() + " полок");
+                    bookshelf.getCountEmptyShelves() + " полок");
             for (Book book : bookshelf.getAll()) {
-                System.out.println("|" + book +
-                        " ".repeat(length - book.getLength()) + "|\n" +
+                System.out.println("|" + book + " ".repeat(length - book.getLength()) + "|\n" +
                         "|" + "-".repeat(length) + "|");
             }
             if (countBooks != bookshelf.getCapacity()) {
@@ -43,7 +42,7 @@ public class BookshelfTest {
         }
     }
 
-    private static boolean isValidChosenMenuItem() {
+    private static boolean isActionSelected() {
         String menuItem = sc.nextLine();
         if (isValid(menuItem)) {
             switch (Integer.parseInt(menuItem)) {

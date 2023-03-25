@@ -20,14 +20,12 @@ public class Bookshelf {
         return countBooks;
     }
 
-    public Book getBook(int index) {
-        return books[index];
-    }
-
     public boolean add(Book book) {
         if (countBooks < CAPACITY) {
             books[countBooks] = book;
-            checkBookLength(books[countBooks]);
+            if (books[countBooks].getLength() > length) {
+                length = books[countBooks].getLength();
+            }
             countBooks++;
             return true;
         }
@@ -35,8 +33,8 @@ public class Bookshelf {
     }
 
     public Book find(String title) {
-        int bookIndex = findIndex(title);
-        return bookIndex != -1 ? getBook(bookIndex) : null;
+        int index = findIndex(title);
+        return index != -1 ? books[index] : null;
     }
 
     public boolean delete(String title) {
@@ -47,23 +45,14 @@ public class Bookshelf {
         if (index != -1) {
             int lengthThisBook = books[index].getLength();
             books[index] = null;
-            System.arraycopy(books, index + 1, books, index, CAPACITY - index - 1);
+            System.arraycopy(books, index + 1, books, index, countBooks - index - 1);
             countBooks--;
             if (lengthThisBook == length) {
-                findNewLength();
+                calcMaxLength();
             }
             return true;
         }
         return false;
-    }
-
-    public int findIndex(String title) {
-        for (int i = 0; i < countBooks; i++) {
-            if (books[i].getTitle().equals(title)) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     public boolean clearShelves() {
@@ -75,7 +64,7 @@ public class Bookshelf {
         return true;
     }
 
-    public int getEmptyShelvesCount() {
+    public int getCountEmptyShelves() {
         return CAPACITY - countBooks;
     }
 
@@ -83,22 +72,22 @@ public class Bookshelf {
         return Arrays.copyOf(books, countBooks);
     }
 
-    private void checkBookLength(Book book) {
-        if (book.getLength() == length || book.getLength() < length) {
-            return;
+    private int findIndex(String title) {
+        for (int i = 0; i < countBooks; i++) {
+            if (books[i].getTitle().equals(title)) {
+                return i;
+            }
         }
-        if (book.getLength() > length) {
-            length = book.getLength();
-        }
+        return -1;
     }
 
-    private void findNewLength() {
-        int maxLengthBook = Integer.MIN_VALUE;
+    private void calcMaxLength() {
+        int maxLengthBook = 0;
         for (Book book : getAll()) {
             if (book.getLength() > maxLengthBook) {
                 maxLengthBook = book.getLength();
+                length = maxLengthBook;
             }
         }
-        length = maxLengthBook;
     }
 }

@@ -82,7 +82,6 @@ public class BookshelfTest {
     }
 
     private static Book createBook() {
-        Scanner sc = new Scanner(System.in);
         System.out.print("Введите имя автора: ");
         String author = sc.nextLine();
         System.out.print("Введите название книги: ");
@@ -94,11 +93,11 @@ public class BookshelfTest {
 
     private static void findBook() {
         System.out.print("Введите название книги: ");
-        Book findBook = bookshelf.find(sc.nextLine());
-        if (findBook == null) {
+        Book foundBook = bookshelf.find(sc.nextLine());
+        if (foundBook == null) {
             System.out.println("Книга не была найдена. Убедитесь, что название введено правильно.");
         } else {
-            System.out.println("Книга найдена: " + findBook);
+            System.out.println("Книга найдена: " + foundBook);
         }
     }
 

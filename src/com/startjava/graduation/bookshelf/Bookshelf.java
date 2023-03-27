@@ -23,9 +23,7 @@ public class Bookshelf {
     public boolean add(Book book) {
         if (countBooks < CAPACITY) {
             books[countBooks] = book;
-            if (books[countBooks].getLength() > length) {
-                length = books[countBooks].getLength();
-            }
+            checkMaxLength(books[countBooks].getLength());
             countBooks++;
             return true;
         }
@@ -72,6 +70,12 @@ public class Bookshelf {
         return Arrays.copyOf(books, countBooks);
     }
 
+    private void checkMaxLength(int lengthThisBook) {
+        if (lengthThisBook > length) {
+            length = lengthThisBook;
+        }
+    }
+
     private int findIndex(String title) {
         for (int i = 0; i < countBooks; i++) {
             if (books[i].getTitle().equals(title)) {
@@ -84,9 +88,7 @@ public class Bookshelf {
     private void calcMaxLength() {
         length = 0;
         for (Book book : getAll()) {
-            if (book.getLength() > length) {
-                length = book.getLength();
-            }
+            checkMaxLength(book.getLength());
         }
     }
 }
